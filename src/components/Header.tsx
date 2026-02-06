@@ -32,6 +32,7 @@ interface HeaderProps {
 }
 
 const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
+  { id: 'home', label: 'Home', icon: <span className="text-sm">🏠</span> },
   { id: 'comparison', label: 'Confronto', icon: <Sparkles className="w-4 h-4" /> },
   { id: 'catalog', label: 'Catalogo', icon: <span className="text-sm">📚</span> },
   { id: 'generator', label: 'Generatore', icon: <span className="text-sm">✨</span> },
@@ -53,10 +54,10 @@ export function Header({ isDark, toggleDark, favoritesCount, activeTab, onTabCha
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg font-bold leading-tight text-foreground">
-                Prompting Avvocati
+                AI & Prompting per Avvocati
               </h1>
               <p className="text-xs text-muted-foreground">
-                Guida per Civilisti Italiani
+                Breve guida per interagire con l'AI
               </p>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { CatalogSection } from '@/components/CatalogSection';
 import { GeneratorSection } from '@/components/GeneratorSection';
 import { GlossarySection } from '@/components/GlossarySection';
 import { PracticesSection } from '@/components/PracticesSection';
+import { HomeSection } from '@/components/HomeSection';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import { useFavorites } from '@/hooks/useFavorites';
 import type { TabType } from '@/types';
@@ -41,6 +42,9 @@ function App() {
             toggleFavorite={toggleFavorite} 
           />
         )}
+        {activeTab === 'home' && (
+          <HomeSection />
+        )}
         
         {activeTab === 'catalog' && (
           <CatalogSection 
@@ -67,7 +71,7 @@ function App() {
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-semibold mb-3">Prompting Avvocati</h3>
+              <h3 className="font-semibold mb-3">AI & Prompting per Avvocati</h3>
               <p className="text-sm text-muted-foreground">
                 Guida interattiva per l'utilizzo dell'AI nella pratica legale italiana.
               </p>
@@ -88,6 +92,11 @@ function App() {
                 <li>
                   <a href="https://www.ordineavvocati.it/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                     Consiglio Nazionale Forense
+                  </a>
+                </li>
+                <li>
+                  <a href="https://ordineavvocaticomo.it/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                    Ordine degli Avvocati di Como
                   </a>
                 </li>
               </ul>
