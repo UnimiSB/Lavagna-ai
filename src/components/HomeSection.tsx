@@ -1,5 +1,5 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChatInterface } from './ChatInterface';
 
 export function HomeSection() {
   return (
@@ -18,9 +18,16 @@ export function HomeSection() {
         <CardContent>
           <p className="text-sm text-muted-foreground">Nel corso dei mesi di dicembre 2024 e gennaio 2025, l'Ordine degli Avvocati di Como ha organizzato una serie di incontri formativi relativi all'utilizzo dell'intelligenza artificiale nella professione legale.
             E' stato così realizzato, dall'intelligenza artificiale generativa, il presente breve prontuario. Nella sezione "Catalogo" sono elencate alcune delle più note tecniche di prompting, ossia la tecnica di formulare "quesiti" all'AI, modulando le istruzioni in funzione del risultato desiderato e della fattispecie in esame; le tecniche possono essere confrontate nella sezione "Confronto".
-            Vi sono poi un "Glossario" e un breve elenco di utili accorgimenti ("Best practices") da adottare nell'uso dell'IA.. </p>
+            Vi sono poi un "Glossario" e un breve elenco di utili accorgimenti ("Best practices") da adottare nell'uso dell'IA.
+          </p>
+          <p className="text-sm text-muted-foreground mt-3">
+            Puoi anche utilizzare la chat qui sotto per interagire direttamente con diversi modelli AI e mettere in pratica le tecniche di prompting.
+          </p>
         </CardContent>
       </Card>
+
+      {/* AI Chat Interface */}
+      <ChatInterface />
     </div>
   );
 }

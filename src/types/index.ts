@@ -37,3 +37,14 @@ export interface PromptTemplate {
 }
 
 export type TabType = 'home' | 'comparison' | 'catalog' | 'glossary' | 'practices' | 'generator';
+
+// Chat types
+export type {
+  ChatMessage,
+  Conversation,
+  OpenRouterModel,
+  ChatCompletionRequest,
+  ChatCompletionResponse,
+  StreamChunk,
+  OpenRouterError,
+} from './chat';
