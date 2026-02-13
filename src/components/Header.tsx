@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { 
-  Scale, 
-  Moon, 
-  Sun, 
-  ChevronDown, 
-  ExternalLink, 
+import {
+  Scale,
+  Moon,
+  Sun,
+  ChevronDown,
+  ExternalLink,
   Heart,
   Sparkles,
   Menu,
@@ -33,11 +33,11 @@ interface HeaderProps {
 
 const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
   { id: 'home', label: 'Home', icon: <span className="text-sm">🏠</span> },
-  { id: 'comparison', label: 'Confronto', icon: <Sparkles className="w-4 h-4" /> },
   { id: 'catalog', label: 'Catalogo', icon: <span className="text-sm">📚</span> },
-  { id: 'generator', label: 'Generatore', icon: <span className="text-sm">✨</span> },
+  { id: 'comparison', label: 'Confronto', icon: <Sparkles className="w-4 h-4" /> },
   { id: 'glossary', label: 'Glossario', icon: <span className="text-sm">📖</span> },
   { id: 'practices', label: 'Best Practices', icon: <span className="text-sm">✅</span> },
+  { id: 'generator', label: 'Generatore', icon: <span className="text-sm">✨</span> },
 ];
 
 export function Header({ isDark, toggleDark, favoritesCount, activeTab, onTabChange }: HeaderProps) {
@@ -71,8 +71,8 @@ export function Header({ isDark, toggleDark, favoritesCount, activeTab, onTabCha
                 className={`
                   relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
                   flex items-center gap-2
-                  ${activeTab === tab.id 
-                    ? 'bg-teal-500/10 text-teal-600 dark:text-teal-400' 
+                  ${activeTab === tab.id
+                    ? 'bg-teal-500/10 text-teal-600 dark:text-teal-400'
                     : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                   }
                 `}
@@ -104,9 +104,9 @@ export function Header({ isDark, toggleDark, favoritesCount, activeTab, onTabCha
                 <DropdownMenuSeparator />
                 {aiTools.map((tool) => (
                   <DropdownMenuItem key={tool.name} asChild>
-                    <a 
-                      href={tool.url} 
-                      target="_blank" 
+                    <a
+                      href={tool.url}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between cursor-pointer"
                     >
@@ -173,8 +173,8 @@ export function Header({ isDark, toggleDark, favoritesCount, activeTab, onTabCha
                   className={`
                     px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200
                     flex items-center gap-3 text-left
-                    ${activeTab === tab.id 
-                      ? 'bg-teal-500/10 text-teal-600 dark:text-teal-400' 
+                    ${activeTab === tab.id
+                      ? 'bg-teal-500/10 text-teal-600 dark:text-teal-400'
                       : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                     }
                   `}
@@ -188,7 +188,7 @@ export function Header({ isDark, toggleDark, favoritesCount, activeTab, onTabCha
                   )}
                 </button>
               ))}
-              
+
               <div className="mt-4 pt-4 border-t">
                 <p className="px-4 text-xs font-medium text-muted-foreground mb-2">
                   STRUMENTI AI

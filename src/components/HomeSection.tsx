@@ -16,7 +16,9 @@ export function HomeSection() {
           <CardTitle className="text-base">Benvenuto</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">Nel corso dei mesi di dicembre 2024, l'Ordine degli Avvocati di Como ha organizzato incontri formativi relativi all'AI e la professione legale. E' stato così realizzato un progetto per aiutare gli avvocati a interagire con l'AI in modo efficace e sicuro. </p>
+          <p className="text-sm text-muted-foreground">Nel corso dei mesi di dicembre 2024 e gennaio 2025, l'Ordine degli Avvocati di Como ha organizzato una serie di incontri formativi relativi all'utilizzo dell'intelligenza artificiale nella professione legale.
+            E' stato così realizzato, dall'intelligenza artificiale generativa, il presente breve prontuario. Nella sezione "Catalogo" sono elencate alcune delle più note tecniche di prompting, ossia la tecnica di formulare "quesiti" all'AI, modulando le istruzioni in funzione del risultato desiderato e della fattispecie in esame; le tecniche possono essere confrontate nella sezione "Confronto".
+            Vi sono poi un "Glossario" e un breve elenco di utili accorgimenti ("Best practices") da adottare nell'uso dell'IA.. </p>
         </CardContent>
       </Card>
     </div>

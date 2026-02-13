@@ -1,11 +1,51 @@
-# React + TypeScript + Vite
+# Lavagna AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, intelligent whiteboard application built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow the instructions below to set up and run the project locally.
+
+### Prerequisites
+
+Ensure you have Node.js and npm installed on your machine.
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd Lavagna-ai
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+### Running Locally
+
+To start the development server, run:
+
+```bash
+npm run dev
+```
+
+Open your browser and navigate to `http://localhost:5173` to see the application in action.
+
+### Building for Production
+
+To build the application for production, run:
+
+```bash
+npm run build
+```
+
+The build artifacts will be stored in the `dist/` directory.
+
+## Technical Details
+
+This project uses React, TypeScript, and Vite.
 
 ## React Compiler
 

@@ -12,7 +12,7 @@ import type { TabType } from '@/types';
 import { Toaster } from '@/components/ui/sonner';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<TabType>('comparison');
+  const [activeTab, setActiveTab] = useState<TabType>('home');
   const { isDark, toggle, isLoaded: themeLoaded } = useDarkMode();
   const { favorites, toggleFavorite, isLoaded: favoritesLoaded } = useFavorites();
 
@@ -27,40 +27,40 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header 
-        isDark={isDark} 
-        toggleDark={toggle} 
+      <Header
+        isDark={isDark}
+        toggleDark={toggle}
         favoritesCount={favorites.length}
         activeTab={activeTab}
         onTabChange={setActiveTab}
       />
-      
+
       <main className="container mx-auto px-4 py-8">
         {activeTab === 'comparison' && (
-          <ComparisonSection 
-            favorites={favorites} 
-            toggleFavorite={toggleFavorite} 
+          <ComparisonSection
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
           />
         )}
         {activeTab === 'home' && (
           <HomeSection />
         )}
-        
+
         {activeTab === 'catalog' && (
-          <CatalogSection 
-            favorites={favorites} 
-            toggleFavorite={toggleFavorite} 
+          <CatalogSection
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
           />
         )}
-        
+
         {activeTab === 'generator' && (
           <GeneratorSection />
         )}
-        
+
         {activeTab === 'glossary' && (
           <GlossarySection />
         )}
-        
+
         {activeTab === 'practices' && (
           <PracticesSection />
         )}
