@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Github, BookOpen } from 'lucide-react';
@@ -27,7 +26,6 @@ export function IntroSection() {
           <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
             <li>Catalogo organizzato di tecniche di prompting e modelli utili.</li>
             <li>Sezione di confronto per scegliere l'approccio più adatto.</li>
-            <li>Generatore di prompt e template pronti all'uso.</li>
             <li>Glossario e best practices per un uso responsabile.</li>
           </ul>
 
@@ -38,7 +36,7 @@ export function IntroSection() {
 
             <Button variant="outline" asChild>
               <a href="https://github.com/UnimiSB/Lavagna-ai" target="_blank" rel="noopener noreferrer">
-                <GitHub className="mr-2 h-4 w-4" /> Repository
+                <Github className="mr-2 h-4 w-4" /> Repository
               </a>
             </Button>
           </div>

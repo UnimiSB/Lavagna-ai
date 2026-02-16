@@ -36,7 +36,7 @@ export interface PromptTemplate {
   category: string;
 }
 
-export type TabType = 'home' | 'comparison' | 'catalog' | 'glossary' | 'practices' | 'generator';
+export type TabType = 'home' | 'comparison' | 'catalog' | 'glossary' | 'practices';
 
 // Chat types
 export type {

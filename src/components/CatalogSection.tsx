@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import { 
-  Search, 
-  Heart, 
-  Copy, 
-  CheckCheck, 
+import {
+  Search,
+  Heart,
+  Copy,
+  CheckCheck,
   BookOpen,
   Filter,
   ChevronDown,
@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
@@ -43,15 +44,15 @@ export function CatalogSection({ favorites, toggleFavorite }: CatalogSectionProp
 
   const filteredTechniques = useMemo(() => {
     return techniques.filter(tech => {
-      const matchesSearch = 
+      const matchesSearch =
         searchQuery === '' ||
         tech.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tech.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tech.applicazioni.some(a => a.toLowerCase().includes(searchQuery.toLowerCase()));
-      
+
       const matchesCategory = filterCategory === 'all' || tech.category === filterCategory;
       const matchesComplexity = filterComplexity === 'all' || tech.complexity === filterComplexity;
-      
+
       return matchesSearch && matchesCategory && matchesComplexity;
     });
   }, [searchQuery, filterCategory, filterComplexity]);
@@ -100,42 +101,52 @@ export function CatalogSection({ favorites, toggleFavorite }: CatalogSectionProp
       </div>
 
       {/* Search and Filters */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Cerca tecniche, applicazioni..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
-          />
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex-1 space-y-1.5">
+          <Label htmlFor="search" className="text-xs font-medium text-muted-foreground ml-1">Cerca</Label>
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              id="search"
+              placeholder="Cerca tecniche, applicazioni..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 h-10 shadow-sm"
+            />
+          </div>
         </div>
-        
-        <Select value={filterCategory} onValueChange={setFilterCategory}>
-          <SelectTrigger className="w-40">
-            <Filter className="h-4 w-4 mr-2" />
-            <SelectValue placeholder="Categoria" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Tutte</SelectItem>
-            <SelectItem value="base">Base</SelectItem>
-            <SelectItem value="avanzata">Avanzata</SelectItem>
-            <SelectItem value="esperta">Esperta</SelectItem>
-          </SelectContent>
-        </Select>
 
-        <Select value={filterComplexity} onValueChange={setFilterComplexity}>
-          <SelectTrigger className="w-40">
-            <SelectValue placeholder="Complessità" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Tutte</SelectItem>
-            <SelectItem value="Bassa">Bassa</SelectItem>
-            <SelectItem value="Media">Media</SelectItem>
-            <SelectItem value="Alta">Alta</SelectItem>
-            <SelectItem value="Molto Alta">Molto Alta</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="space-y-1.5">
+          <Label htmlFor="category" className="text-xs font-medium text-muted-foreground ml-1">Categoria</Label>
+          <Select value={filterCategory} onValueChange={setFilterCategory}>
+            <SelectTrigger id="category" className="w-full md:w-48 h-10 shadow-sm">
+              <Filter className="h-3.5 w-3.5 mr-2 opacity-70" />
+              <SelectValue placeholder="Categoria" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Tutte</SelectItem>
+              <SelectItem value="base">Base</SelectItem>
+              <SelectItem value="avanzata">Avanzata</SelectItem>
+              <SelectItem value="esperta">Esperta</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="complexity" className="text-xs font-medium text-muted-foreground ml-1">Complessità</Label>
+          <Select value={filterComplexity} onValueChange={setFilterComplexity}>
+            <SelectTrigger id="complexity" className="w-full md:w-48 h-10 shadow-sm">
+              <SelectValue placeholder="Complessità" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Tutte</SelectItem>
+              <SelectItem value="Bassa">Bassa</SelectItem>
+              <SelectItem value="Media">Media</SelectItem>
+              <SelectItem value="Alta">Alta</SelectItem>
+              <SelectItem value="Molto Alta">Molto Alta</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Results Count */}
@@ -148,7 +159,7 @@ export function CatalogSection({ favorites, toggleFavorite }: CatalogSectionProp
         {filteredTechniques.map((technique) => {
           const isFav = favorites.includes(technique.id);
           const isExpanded = expandedId === technique.id;
-          
+
           return (
             <Collapsible
               key={technique.id}
@@ -180,7 +191,7 @@ export function CatalogSection({ favorites, toggleFavorite }: CatalogSectionProp
                     </Button>
                   </div>
                 </CardHeader>
-                
+
                 <CardContent className="pt-0">
                   <div className="flex flex-wrap gap-2 mb-4">
                     <Badge variant="outline" className={getComplexityColor(technique.complexity)}>
@@ -251,9 +262,9 @@ export function CatalogSection({ favorites, toggleFavorite }: CatalogSectionProp
                   </CollapsibleContent>
 
                   <CollapsibleTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       className="w-full mt-2 text-muted-foreground"
                     >
                       {isExpanded ? (

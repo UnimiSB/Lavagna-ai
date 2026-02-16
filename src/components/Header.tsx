@@ -37,7 +37,6 @@ const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
   { id: 'comparison', label: 'Confronto', icon: <Sparkles className="w-4 h-4" /> },
   { id: 'glossary', label: 'Glossario', icon: <span className="text-sm">📖</span> },
   { id: 'practices', label: 'Best Practices', icon: <span className="text-sm">✅</span> },
-  { id: 'generator', label: 'Generatore', icon: <span className="text-sm">✨</span> },
 ];
 
 export function Header({ isDark, toggleDark, favoritesCount, activeTab, onTabChange }: HeaderProps) {

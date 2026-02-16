@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Header } from '@/components/Header';
 import { ComparisonSection } from '@/components/ComparisonSection';
 import { CatalogSection } from '@/components/CatalogSection';
-import { GeneratorSection } from '@/components/GeneratorSection';
 import { GlossarySection } from '@/components/GlossarySection';
 import { PracticesSection } from '@/components/PracticesSection';
 import { HomeSection } from '@/components/HomeSection';
@@ -37,10 +36,7 @@ function App() {
 
       <main className="container mx-auto px-4 py-8">
         {activeTab === 'comparison' && (
-          <ComparisonSection
-            favorites={favorites}
-            toggleFavorite={toggleFavorite}
-          />
+          <ComparisonSection />
         )}
         {activeTab === 'home' && (
           <HomeSection />
@@ -53,9 +49,7 @@ function App() {
           />
         )}
 
-        {activeTab === 'generator' && (
-          <GeneratorSection />
-        )}
+
 
         {activeTab === 'glossary' && (
           <GlossarySection />
@@ -73,7 +67,7 @@ function App() {
             <div>
               <h3 className="font-semibold mb-3">AI & Prompting per Avvocati</h3>
               <p className="text-sm text-muted-foreground">
-                Guida interattiva per l'utilizzo dell'AI nella pratica legale italiana.
+                Guida interattiva per l'utilizzo dell'AI nella pratica legale.
               </p>
             </div>
             <div>
@@ -104,12 +98,12 @@ function App() {
             <div>
               <h3 className="font-semibold mb-3">Disclaimer</h3>
               <p className="text-sm text-muted-foreground">
-                Questo strumento è fornito a scopo informativo. Non sostituisce il parere professionale di un avvocato.
+                Strumento fornito a scopo informativo.
               </p>
             </div>
           </div>
           <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Prompting Avvocati - Strumento per Civilisti Italiani
+            © 02.26
           </div>
         </div>
       </footer>

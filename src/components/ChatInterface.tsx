@@ -4,18 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import {
   Send,
   Plus,
   Download,
-  Trash2,
-  RefreshCw,
-  MessageSquare,
   Loader2,
-  AlertCircle,
-  Wallet
+  AlertCircle
 } from 'lucide-react';
 import { useChat } from '@/hooks/useChat';
 import { POPULAR_MODELS, OpenRouterService } from '@/services/openrouter';
@@ -24,16 +19,12 @@ import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 export function ChatInterface() {
   const {
     currentConversation,
-    conversations,
     isLoading,
     isStreaming,
     error,
     isLoaded,
     sendMessage,
     createNewConversation,
-    switchConversation,
-    deleteConversation,
-    clearCurrentConversation,
     exportConversation,
     retryLastMessage,
   } = useChat();
@@ -74,7 +65,7 @@ export function ChatInterface() {
     if (isLoaded) {
       fetchCredits();
     }
-  }, [isLoaded, conversations.length]);
+  }, [isLoaded]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -124,197 +115,123 @@ export function ChatInterface() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-      {/* Conversations Sidebar */}
-      <Card className="lg:col-span-1">
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-base">Conversazioni</CardTitle>
-            <Button
-              size="sm"
-              onClick={() => createNewConversation(selectedModel)}
-              className="h-8 w-8 p-0 bg-teal-500 hover:bg-teal-600"
-            >
-              <Plus className="h-4 w-4" />
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <ScrollArea className="h-[500px]">
-            <div className="space-y-2">
-              {conversations.length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-8">
-                  Nessuna conversazione
-                </p>
-              ) : (
-                conversations.map((conv) => (
-                  <div
-                    key={conv.id}
-                    className={`p-3 rounded-md border cursor-pointer transition-colors ${
-                      conv.id === currentConversation?.id
-                        ? 'bg-teal-50 dark:bg-teal-950 border-teal-500'
-                        : 'hover:bg-accent'
-                    }`}
-                    onClick={() => switchConversation(conv.id)}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{conv.title}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {conv.messages.length} messaggi
-                        </p>
-                      </div>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className="h-6 w-6 p-0 hover:text-destructive"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          deleteConversation(conv.id);
-                        }}
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          </ScrollArea>
-
-          {/* Credit Display */}
-          <div className="mt-4 pt-4 border-t">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <Wallet className="h-3.5 w-3.5 text-muted-foreground" />
-                <span className="text-xs text-muted-foreground">Credito API:</span>
-              </div>
-              {loadingCredits ? (
-                <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
-              ) : credits ? (
-                <Badge variant="secondary" className="text-xs font-semibold">
-                  ${(credits.limit - credits.usage).toFixed(2)}
-                </Badge>
-              ) : (
-                <Badge variant="outline" className="text-xs">
-                  N/A
-                </Badge>
-              )}
-            </div>
-            {credits && credits.limit > 0 && (
-              <div className="mt-2">
-                <div className="w-full bg-muted rounded-full h-1.5">
-                  <div
-                    className="bg-teal-500 h-1.5 rounded-full transition-all"
-                    style={{ width: `${((credits.limit - credits.usage) / credits.limit) * 100}%` }}
-                  />
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Usato: ${credits.usage.toFixed(2)} / ${credits.limit.toFixed(2)}
-                </p>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
+    <div className="w-full">
       {/* Main Chat Area */}
-      <Card className="lg:col-span-3">
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between flex-wrap gap-2">
-            <CardTitle>Chat AI</CardTitle>
+      <Card className="w-full shadow-sm">
+        <CardHeader className="py-2 px-4 bg-muted/30">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <CardTitle className="text-sm font-bold text-teal-700 dark:text-teal-400">Chat AI</CardTitle>
+
+              {/* Relocated AI Cost/Budget Display */}
+              <div className="flex items-center gap-2 bg-background/50 border border-teal-500/20 px-2.5 py-1 rounded-full shadow-sm">
+                <span className="text-[10px] text-muted-foreground font-semibold uppercase tracking-tight">Budget:</span>
+                {loadingCredits ? (
+                  <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
+                ) : credits ? (
+                  <span className="text-[11px] font-black text-teal-600 dark:text-teal-400 font-mono">
+                    ${(credits.limit - credits.usage).toFixed(2)}
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-muted-foreground font-bold">N/A</span>
+                )}
+              </div>
+            </div>
+
             <div className="flex items-center gap-2">
               <Select value={selectedModel} onValueChange={setSelectedModel}>
-                <SelectTrigger className="w-[200px]">
+                <SelectTrigger className="h-8 w-[160px] text-xs bg-background">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {POPULAR_MODELS.map((model) => (
-                    <SelectItem key={model.id} value={model.id}>
+                    <SelectItem key={model.id} value={model.id} className="text-xs">
                       {model.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              {currentConversation && (
-                <>
+
+              <div className="flex items-center gap-1 border-l pl-2">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-8 w-8 p-0 text-muted-foreground hover:text-teal-600"
+                  onClick={() => createNewConversation(selectedModel)}
+                  title="Nuova chat"
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+                {currentConversation && (
                   <Button
                     size="sm"
-                    variant="outline"
+                    variant="ghost"
+                    className="h-8 w-8 p-0 text-muted-foreground hover:text-teal-600"
                     onClick={() => exportConversation(currentConversation.id)}
-                    title="Esporta conversazione"
+                    title="Esporta"
                   >
                     <Download className="h-4 w-4" />
                   </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={clearCurrentConversation}
-                    title="Cancella messaggi"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </CardHeader>
         <Separator />
         <CardContent className="p-0">
-          {/* Messages Area */}
-          <ScrollArea className="h-[400px] p-4">
-            <div ref={scrollRef}>
+          {/* Messages Area - Terminal Style */}
+          <ScrollArea className="h-[400px] p-4 bg-zinc-950 font-mono text-sm border-x border-zinc-800">
+            <div ref={scrollRef} className="space-y-4">
               {!currentConversation || currentConversation.messages.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center py-16">
-                  <MessageSquare className="h-12 w-12 text-muted-foreground mb-4" />
-                  <p className="text-lg font-medium">Inizia una conversazione</p>
-                  <p className="text-sm text-muted-foreground mt-2 max-w-md">
-                    Seleziona un modello e invia un messaggio per iniziare a chattare con l'AI
-                  </p>
+                <div className="flex flex-col items-center justify-center h-full text-center py-16 text-zinc-500">
+                  <p className="text-base uppercase tracking-widest mb-2 opacity-50">System Initialized</p>
+                  <p className="text-xs">Waiting for command input...</p>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {currentConversation.messages.map((message) => (
                     <div
                       key={message.id}
-                      className={`flex ${
-                        message.role === 'user' ? 'justify-end' : 'justify-start'
-                      }`}
+                      className="group"
                     >
+                      <div className="flex items-center gap-2 mb-1.5 opacity-70">
+                        <span className={message.role === 'user' ? 'text-teal-400' : 'text-amber-400'}>
+                          {message.role === 'user' ? '[USER]' : `[AI_SYSTEM:${message.model?.split('/')[1] || 'LEGALE'}]`}
+                        </span>
+                        <span className="text-zinc-600">--&gt;</span>
+                      </div>
                       <div
-                        className={`max-w-[80%] rounded-lg p-3 ${
-                          message.role === 'user'
-                            ? 'bg-teal-500 text-white'
-                            : 'bg-muted'
-                        }`}
+                        className={`pl-4 border-l-2 ${message.role === 'user'
+                          ? 'border-teal-500/30 text-zinc-100'
+                          : 'border-amber-500/30 text-zinc-300'
+                          }`}
                       >
-                        <div className="flex items-start justify-between gap-2 mb-1">
-                          <Badge
-                            variant={message.role === 'user' ? 'outline' : 'secondary'}
-                            className={`text-xs ${message.role === 'user' ? 'border-white/30 text-white' : ''}`}
-                          >
-                            {message.role === 'user' ? 'Tu' : message.model?.split('/')[1] || 'AI'}
-                          </Badge>
+                        <div className="whitespace-pre-wrap leading-relaxed tabular-nums">
+                          {message.content}
+                          {isStreaming && message.role === 'assistant' && message.id === currentConversation.messages[currentConversation.messages.length - 1].id && (
+                            <span className="inline-block w-2 h-4 bg-amber-500 ml-1 animate-pulse" />
+                          )}
                         </div>
-                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                         {message.role === 'assistant' && message.content && (
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            className="mt-2 h-6 text-xs hover:bg-accent"
-                            onClick={() => copy(message.content)}
-                          >
-                            {copied ? 'Copiato!' : 'Copia'}
-                          </Button>
+                          <div className="mt-4 flex gap-2 overflow-hidden max-h-0 group-hover:max-h-10 transition-all duration-300">
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="h-6 text-[10px] text-zinc-500 hover:text-teal-400 hover:bg-zinc-900 border border-zinc-800 uppercase tracking-tighter"
+                              onClick={() => copy(message.content)}
+                            >
+                              {copied ? 'Copied' : 'Execute Copy'}
+                            </Button>
+                          </div>
                         )}
                       </div>
                     </div>
                   ))}
-                  {isStreaming && (
-                    <div className="flex justify-start">
-                      <div className="bg-muted rounded-lg p-3">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      </div>
+                  {isStreaming && currentConversation.messages[currentConversation.messages.length - 1].role === 'user' && (
+                    <div className="flex items-center gap-2 text-amber-500">
+                      <span>[AI_SYSTEM]</span>
+                      <span className="text-zinc-600">--&gt;</span>
+                      <span className="inline-block w-2 h-4 bg-amber-500 animate-pulse" />
                     </div>
                   )}
                 </div>
@@ -324,36 +241,41 @@ export function ChatInterface() {
 
           {/* Error Display */}
           {error && (
-            <div className="px-4 py-2 bg-destructive/10 border-t border-destructive/20">
+            <div className="px-4 py-2 bg-rose-950/30 border-t border-rose-500/20 font-mono">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <AlertCircle className="h-4 w-4 text-destructive" />
-                  <p className="text-sm text-destructive">{error}</p>
+                <div className="flex items-center gap-2 text-rose-400 text-xs">
+                  <AlertCircle className="h-3 w-3" />
+                  <p>ERROR: {error}</p>
                 </div>
-                <Button size="sm" variant="ghost" onClick={retryLastMessage}>
-                  <RefreshCw className="h-4 w-4 mr-2" />
-                  Riprova
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={retryLastMessage}
+                  className="h-6 text-[10px] text-rose-400 hover:bg-rose-500/10 border border-rose-500/20"
+                >
+                  RETRY_PROCEDURE()
                 </Button>
               </div>
             </div>
           )}
 
-          {/* Input Area */}
-          <div className="p-4 border-t">
-            <div className="flex gap-2">
+          {/* Input Area - Terminal Style */}
+          <div className="p-4 bg-zinc-900/50 border-t border-zinc-800 font-mono">
+            <div className="flex gap-3">
+              <div className="text-teal-500 pt-3 text-sm font-bold">$&gt;</div>
               <Textarea
                 ref={textareaRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Scrivi il tuo messaggio... (Shift+Enter per andare a capo)"
-                className="min-h-[60px] max-h-[200px] resize-none"
+                placeholder="Inserisci comando..."
+                className="min-h-[80px] max-h-[200px] resize-none bg-transparent border-none focus-visible:ring-0 text-zinc-100 placeholder:text-zinc-700 text-sm p-3 scrollbar-hide"
                 disabled={isLoading}
               />
               <Button
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
-                className="bg-teal-500 hover:bg-teal-600 self-end"
+                className="bg-zinc-800 hover:bg-teal-900/50 hover:text-teal-400 text-zinc-400 self-end border border-zinc-700 h-10 w-10 shadow-lg transition-all"
               >
                 {isLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -362,9 +284,10 @@ export function ChatInterface() {
                 )}
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              Premi Invio per inviare, Shift+Invio per andare a capo
-            </p>
+            <div className="flex items-center justify-between mt-2 px-1 text-[9px] text-zinc-600 uppercase tracking-widest font-bold">
+              <span>Shift + Enter to line break</span>
+              <span>Encoding: UTF-8</span>
+            </div>
           </div>
         </CardContent>
       </Card>
