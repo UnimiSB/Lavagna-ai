@@ -27,6 +27,9 @@ export function HomeSection() {
             <p className="text-sm leading-relaxed">
               Nello spazio a lato è possibile interagire con l'intelligenza artificiale generativa "Chat AI", scegliendo nel menù a tendina uno tra i tanti modelli disponibili. Il piccolo budget cala ad ogni interazione della quale si può vedere il costo.
             </p>
+            <p className="text-sm leading-relaxed">
+              Como, febbraio 2026
+            </p>
           </CardContent>
         </Card>
 
