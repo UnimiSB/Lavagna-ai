@@ -22,7 +22,7 @@ export function HomeSection() {
               Nel corso dei mesi di dicembre 2024 e gennaio 2025, l'Ordine degli Avvocati di Como ha organizzato una serie di incontri formativi relativi all'utilizzo dell'intelligenza artificiale nella professione legale.
             </p>
             <p className="text-sm leading-relaxed">
-              È stato così realizzato, dall'intelligenza artificiale generativa, il presente breve prontuario. Nella sezione "Catalogo" sono elencate alcune delle più note tecniche di prompting; le tecniche possono essere confrontate nella sezione "Confronto". Vi sono poi un "Glossario" e un breve elenco di utili accorgimenti ("Best practices") da adottare nell'uso dell'IA.
+              È stato così realizzato, dalla stessa intelligenza artificiale generativa, il presente breve prontuario. Nella sezione "Catalogo" sono elencate alcune delle più note tecniche di prompting; le tecniche possono essere confrontate nella sezione "Confronto". Vi sono poi un "Glossario" e un breve elenco di utili accorgimenti ("Best practices") da adottare nell'uso dell'IA.
             </p>
             <p className="text-sm leading-relaxed">
               Nello spazio a lato è possibile interagire con l'intelligenza artificiale generativa "Chat AI", scegliendo nel menù a tendina uno tra i tanti modelli disponibili. Il piccolo budget cala ad ogni interazione della quale si può vedere il costo.
